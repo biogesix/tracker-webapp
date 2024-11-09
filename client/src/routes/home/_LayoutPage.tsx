@@ -10,13 +10,12 @@ const LayoutPage = () => {
     supabase.auth.getSession().then(res => {
       console.log(res)
       if (!res.data.session) {
-        nav("/register");
+        nav("/auth");
       }
     });
   }, []);
   return (
     <>
-      LayoutPage
       <Drawer />
       <Outlet />
     </>

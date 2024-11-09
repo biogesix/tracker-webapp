@@ -6,7 +6,8 @@ import {
   faXmark,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { supabase } from "../utils/UserContext";
 
 const navLinks = [
   {
@@ -33,9 +34,15 @@ const navLinks = [
 
 const Sidebar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const nav = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const logOut = async () => {
+    await supabase.auth.signOut();
+    nav("/auth");
   };
 
   return (
@@ -77,17 +84,16 @@ const Sidebar = () => {
         </nav>
 
         <button
-          onClick={() => console.log("Log out clicked")}
-          className="absolute bottom-4 right-4 text-2xl text-black hover:text-red-600"
+          onClick={logOut}
+          className="absolute bottom-4 right-4 gap-2 flex items-center text-black hover:text-red-600"
         >
-          <FontAwesomeIcon icon={faSignOutAlt} />
+          <FontAwesomeIcon icon={faSignOutAlt} size={"lg"} /> Log Out
         </button>
       </div>
-
       {isMenuOpen && (
         <div
+          className="fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-500"
           onClick={toggleMenu}
-          className="fixed inset-0 bg-black bg-opacity-50 "
         />
       )}
     </div>
