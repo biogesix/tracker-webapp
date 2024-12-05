@@ -18,13 +18,12 @@ const AddCategory: React.FC = () => {
   }, [user]);
 
   const [categoryName, setCategoryName] = useState<string>("");
-  const [budget, setBudget] = useState<number>(0);
+  const [budget, setBudget] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [backgroundColor, setBackgroundColor] = useState<string>("");
   const [categoryNameError, setCategoryNameError] = useState<string | null>(
     null
   );
-  // const [description, setDescription] = useState<string>("");
   const [budgetError, setBudgetError] = useState<string | null>(null);
 
   const nav = useNavigate();
@@ -43,7 +42,7 @@ const AddCategory: React.FC = () => {
         setCategoryNameError(null);
       }
 
-      if (!budget || budget <= 0) {
+      if (!budget || parseFloat(budget) <= 0) {
         setBudgetError("Enter valid budget.");
         hasEmptyField = true;
       } else {
@@ -53,12 +52,12 @@ const AddCategory: React.FC = () => {
       if (hasEmptyField) throw Error("Some fields are empty.");
 
       const category: Category = {
-        budget: budget || 0,
+        budget: parseFloat(budget) || 0,
         category_color: backgroundColor,
         category_name: categoryName,
         description: description || "",
         user_id: user!.user_id!,
-        amount_left: budget || 0,
+        amount_left: parseFloat(budget) || 0,
         amount_spent: 0,
       };
 
@@ -114,7 +113,7 @@ const AddCategory: React.FC = () => {
           Add Category
         </h1>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <label
             htmlFor="categoryName"
             className="text-sm font-medium text-gray-700"
@@ -136,7 +135,7 @@ const AddCategory: React.FC = () => {
           )}
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <label
             htmlFor="description"
             className="text-sm font-medium text-gray-700"
@@ -155,16 +154,15 @@ const AddCategory: React.FC = () => {
           />
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <label htmlFor="budget" className="text-sm font-medium text-gray-700">
             Budget:
           </label>
           <input
-            type="number"
+            type="text"
             id="budget"
-            // step={0}
-            // value={budget}
-            onChange={(e) => setBudget(parseFloat(e.target.value) || 0)}
+            value={budget}
+            onChange={(e) => setBudget(e.target.value)}
             className={`w-full rounded-lg border p-3 shadow-sm ${
               budgetError ? "border-red-600" : "border-gray-300"
             }`}
@@ -175,7 +173,7 @@ const AddCategory: React.FC = () => {
           )}
         </div>
 
-        <div>
+        <div className="flex flex-col gap-2">
           <label className="text-sm font-medium text-gray-700">
             Select Background Color:
           </label>
@@ -186,7 +184,7 @@ const AddCategory: React.FC = () => {
                 onClick={() => setBackgroundColor(color)}
                 className={`h-10 w-10 cursor-pointer rounded-full border-2 ${
                   backgroundColor === color
-                    ? "border-blue-500"
+                    ? "border-gray-950"
                     : "border-transparent"
                 }`}
                 style={{ backgroundColor: color }}
@@ -195,12 +193,21 @@ const AddCategory: React.FC = () => {
           </div>
         </div>
 
-        <button
-          type="submit"
-          className="w-full rounded-md bg-teal-800 py-2 font-semibold text-white transition duration-200 hover:bg-blue-700"
-        >
-          Add Category
-        </button>
+        <div className="mt-4 flex gap-4">
+          <button
+            type="button"
+            onClick={closeForm}
+            className="w-full rounded-md bg-gray-300 py-2 font-semibold text-gray-700 transition duration-200 hover:bg-gray-400"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="w-full rounded-md bg-teal-800 py-2 font-semibold text-white transition duration-200 hover:bg-blue-700"
+          >
+            Add Category
+          </button>
+        </div>
       </form>
     </div>
   );

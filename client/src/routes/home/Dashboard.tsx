@@ -31,10 +31,12 @@ const Dashboard = () => {
       return data;
     },
   });
-
   const [totalBudget, setTotalBudget] = useState(0);
   const [totalSpent, setTotalSpent] = useState(0);
   const [totalNotSpent, settotalNotSpent] = useState(0);
+  const [sortOrder, setSortOrder] = useState("budget");
+  const [isAscending, setIsAscending] = useState(false);
+
   useEffect(() => {
     if (categories) {
       console.log(categories);
@@ -55,6 +57,22 @@ const Dashboard = () => {
       });
     }
   }, [categories]);
+
+  const handleSort = (sortBy: string) => {
+    setSortOrder(sortBy);
+    setIsAscending(!isAscending);
+  };
+
+  const sortedCategories = categories?.slice().sort((a, b) => {
+    if (sortOrder === "budget") {
+      return isAscending ? a.budget - b.budget : b.budget - a.budget;
+    } else if (sortOrder === "spent") {
+      return isAscending
+        ? a.amount_spent - b.amount_spent
+        : b.amount_spent - a.amount_spent;
+    }
+    return 0;
+  });
 
   return !categories ? (
     <div className="min-h-full">
@@ -122,6 +140,32 @@ const Dashboard = () => {
       {/* Categories */}
       <div className="mt-8">
         <h2 className="mb-4 text-lg font-medium text-black">Categories</h2>
+        <div className="mb-4 flex justify-between">
+          <button
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            onClick={() => handleSort("budget")}
+          >
+            Sort by Budget (Highest to Lowest)
+          </button>
+          <button
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            onClick={() => handleSort("budget")}
+          >
+            Sort by Budget (Lowest to Highest)
+          </button>
+          <button
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            onClick={() => handleSort("spent")}
+          >
+            Sort by Spent (Highest to Lowest)
+          </button>
+          <button
+            className="rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            onClick={() => handleSort("spent")}
+          >
+            Sort by Spent (Lowest to Highest)
+          </button>
+        </div>
         <div className="grid grid-cols-1 gap-1 md:grid-cols-3">
           {/* Add New Category */}
           <Link
@@ -131,9 +175,8 @@ const Dashboard = () => {
             <span className="text-4xl">+</span>
           </Link>
 
-          {/* Render Existing Categories */}
-          {categories &&
-            categories.map((category) => (
+          {sortedCategories &&
+            sortedCategories.map((category) => (
               <CategoryView category={category} key={category.category_id} />
             ))}
         </div>
