@@ -22,7 +22,7 @@ weeklySummaryRouter.get(
   }
 );
 
-weeklySummaryRouter.get("/:id", async (req: Request, res: Response) => {
+weeklySummaryRouter.get("/user/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const { rows } = await pool.query(
