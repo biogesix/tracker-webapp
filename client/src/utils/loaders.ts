@@ -11,9 +11,9 @@ export const getCategory = (queryClient: QueryClient) => {
           `${import.meta.env.VITE_SERVER_URL}/category/${category_id}`
         );
 
-        console.log(response);
         if (!response.ok) {
           const errorMessage = await response.json();
+          console.log(errorMessage);
           throw Error(errorMessage);
         }
         const { data } = await response.json();
