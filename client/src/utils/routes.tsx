@@ -16,13 +16,18 @@ import Summary from "../routes/home/summary/Summary";
 import WrapupEditCategory from "@/routes/home/wrapup/WrapupEditCategory";
 import EditCategory from "../routes/home/categories/EditCategory";
 import EditExpense from "../routes/home/expense/EditExpense";
-import { getCategory, getExpense, getPreviousWeekCategories } from "./loaders";
+import {
+  getCategory,
+  getExpense,
+  getPreviousWeekCategories,
+  getSavedCategory,
+} from "./loaders";
 import ErrorPage from "../ErrorPage";
 import { queryClient } from "../_Root";
 import WrapupInfoPage from "@/routes/home/wrapup/WrapupInfoPage";
 import SavedCategoryPage from "@/routes/home/summary/SavedCategoryPage";
 import EditSavedCategory from "@/routes/home/summary/EditSavedCategory";
-import EditSavedExpense from "@/routes/home/summary/EditSavedExpense";
+import AddSavedExpense from "@/routes/home/summary/AddSavedExpense";
 
 const router = createBrowserRouter([
   {
@@ -131,10 +136,21 @@ const router = createBrowserRouter([
           {
             path: "savedcategory/:saved_category_id",
             element: <SavedCategoryPage />,
+            loader: getSavedCategory(queryClient),
             children: [
               {
-                path: "expense/:expense_id/edit",
-                element: <EditSavedExpense />,
+                path: "expense",
+                children: [
+                  {
+                    path: ":expense_id/edit",
+                    element: <EditExpense />,
+                    loader: getExpense(queryClient),
+                  },
+                  {
+                    path: "add",
+                    element: <AddSavedExpense />,
+                  },
+                ],
               },
             ],
           },

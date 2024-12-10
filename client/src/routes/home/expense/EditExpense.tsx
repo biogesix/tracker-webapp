@@ -39,6 +39,7 @@ const EditExpense = () => {
         total,
         category_id: expense.category_id,
         date: new Date(timeDate),
+        saved_category_id: expense.saved_category_id,
       };
 
       console.log(newExpense);

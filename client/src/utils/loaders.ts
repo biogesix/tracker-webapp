@@ -65,3 +65,23 @@ export const getPreviousWeekCategories = (queryClient: QueryClient) => {
     });
   };
 };
+
+export const getSavedCategory = (queryClient: QueryClient) => {
+  return async ({ params: { saved_category_id } }: LoaderFunctionArgs) => {
+    return await queryClient.ensureQueryData({
+      queryKey: ["savedCategory", saved_category_id],
+      queryFn: async () => {
+        const response = await fetch(
+          `${import.meta.env.VITE_SERVER_URL}/savedCategories/${saved_category_id}`
+        );
+
+        if (!response.ok) {
+          const errorMessage = await response.json();
+          throw Error(errorMessage);
+        }
+        const { data } = await response.json();
+        return data;
+      },
+    });
+  };
+};

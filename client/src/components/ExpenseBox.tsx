@@ -28,7 +28,7 @@ const ExpenseBox = ({
 }: Expense) => {
   const nav = useNavigate();
   const queryClient = useQueryClient();
-  const { mutate: handleDeleteExpense } = useMutation({
+  const { mutate: handleDeleteExpense, isPending } = useMutation({
     mutationFn: async () => {
       const response = await fetch(
         `${import.meta.env.VITE_SERVER_URL}/expense/${expense_id}`,
@@ -52,7 +52,7 @@ const ExpenseBox = ({
       toast({
         description: "Expense successfully deleted",
       });
-      queryClient.invalidateQueries({
+      queryClient.refetchQueries({
         queryKey: ["category", category_id, "expenses"],
       });
       queryClient.invalidateQueries({
@@ -69,7 +69,9 @@ const ExpenseBox = ({
     },
   });
   const handleEditExpense = () => {
-    nav(`expense/${expense_id}/edit`);
+    if (!isPending) {
+      nav(`expense/${expense_id}/edit`);
+    }
   };
 
   const monthString = new Date(date!).toLocaleString("default", {

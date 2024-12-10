@@ -2,7 +2,6 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { FormEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "@/hooks/use-toast";
-import { X } from "lucide-react";
 import { Expense } from "@/utils/types";
 
 const AddExpense = () => {
@@ -101,10 +100,6 @@ const AddExpense = () => {
         className="absolute h-full w-full bg-black opacity-60"
       ></div>{" "}
       <div className="relative">
-        <button onClick={closeForm} className="absolute right-2 top-2 z-10">
-          <X width={30} height={30} />
-        </button>
-
         <form
           onSubmit={mutate}
           className="z-10 flex h-max max-w-[350px] flex-col gap-2 rounded-md bg-neutral-500 p-5 px-12 sm:w-full"
@@ -150,7 +145,7 @@ const AddExpense = () => {
             value={total ? total : 0}
             disabled
           />
-          <label htmlFor="datetime">Select Date and Time:</label>
+          <label htmlFor="date">Select Date and Time:</label>
           <input
             type="date"
             id="datetime"

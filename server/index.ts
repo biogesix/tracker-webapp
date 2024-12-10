@@ -4,6 +4,7 @@ import { pool } from "./db";
 import userRouter from "./routes/users";
 import cors from "cors";
 import expenseRouter from "./routes/expense";
+import savedCategoriesRouter from "./routes/savedCategories";
 import weeklySummaryRouter from "./routes/weeklySummary";
 import chartRouter from "./routes/charts";
 
@@ -16,6 +17,7 @@ app.use("/expense", expenseRouter);
 app.use("/category", categoryRouter);
 app.use("/user", userRouter);
 app.use("/expense", expenseRouter);
+app.use("/savedCategories", savedCategoriesRouter);
 app.use("/summary", weeklySummaryRouter);
 app.use("/charts", chartRouter);
 

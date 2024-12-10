@@ -9,7 +9,8 @@ interface recalculateExpensesProps {
   pool: Pool;
   category_id: number;
 }
-
+// edits the amount left and amount spent of a category
+// based on the expenses of that category
 export default async function recalculateCategoryExpenses({
   pool,
   category_id,
@@ -19,7 +20,6 @@ export default async function recalculateCategoryExpenses({
     [category_id]
   );
 
-  console.log(totalExpenseRows);
   const { rows: categoryBudgetRows } = await pool.query(
     `SELECT budget FROM "Category" WHERE category_id = $1`,
     [category_id]
