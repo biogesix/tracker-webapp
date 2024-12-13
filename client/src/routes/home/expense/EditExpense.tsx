@@ -1,11 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router";
 import { Expense } from "@/utils/types";
 import { FormEvent, useEffect, useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
 const EditExpense = () => {
-  const expense = useLoaderData() as Expense;
+  const expense = useLoaderData<Expense>();
 
   const { category_id } = useParams();
   const nav = useNavigate();
@@ -15,7 +15,7 @@ const EditExpense = () => {
   const [price, setPrice] = useState<number | null>(expense.price);
   const [quantity, setQuantity] = useState(expense.quantity);
   const [total, setTotal] = useState(expense.total);
-  const [timeDate, setTimeDate] = useState(new Date(expense.date!));
+  const [timeDate, setTimeDate] = useState<Date>(new Date(expense.date || ""));
 
   useEffect(() => {
     const final_price = price ?? 0;
@@ -106,7 +106,7 @@ const EditExpense = () => {
             type="text"
             id="name"
             name="name"
-            value={name}
+            value={name ?? ""}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -140,7 +140,7 @@ const EditExpense = () => {
             type="date"
             id="datetime"
             name="timeDate"
-            value={timeDate.toISOString().split("T")[0]}
+            value={timeDate?.toISOString().split("T")[0] ?? ""}
             onChange={(e) => setTimeDate(new Date(e.target.value))}
             required
           />

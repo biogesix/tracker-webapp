@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router";
 import { BackendResponse } from "@/interfaces/BackendResponse";
 import { Category, User } from "@/utils/types";
 import CategoryView from "@/components/CategoryView";

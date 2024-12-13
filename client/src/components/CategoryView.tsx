@@ -1,5 +1,5 @@
 import { Category } from "@/utils/types";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { PencilLine } from "lucide-react";
 
 const CategoryView = (category: { category: Category }) => {

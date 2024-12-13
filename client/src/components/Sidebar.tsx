@@ -6,7 +6,7 @@ import {
   faXmark,
   faSignOutAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router";
 import { supabase } from "../utils/UserContext";
 
 const navLinks = [

@@ -5,7 +5,7 @@ import getUser from "@/utils/getUser";
 import { SavedCategories, User } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import { WeeklyChart } from "@/components/WeeklyChart";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useParams } from "react-router";
 
 const Summary = () => {
   const { data: user } = useQuery<User>({

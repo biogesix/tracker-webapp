@@ -79,13 +79,13 @@ const WrapupInfoPage = () => {
 
   if (isLoading) return <div>Loading page...</div>;
 
-  const startDate = new Date(wrapUpInfo!.date_start);
+  const startDate = new Date(wrapUpInfo?.date_start ?? "");
   const startShortDate = new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
   }).format(startDate);
 
-  const endDate = new Date(wrapUpInfo!.date_end);
+  const endDate = new Date(wrapUpInfo?.date_end ?? "");
   const endShortDate = new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",

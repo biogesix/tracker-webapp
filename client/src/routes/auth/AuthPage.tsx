@@ -3,7 +3,7 @@ import { FaUser } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { supabase, UserContext } from "../../utils/UserContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { useToast } from "@/hooks/use-toast";
 // import { ToastAction } from "@/components/ui/toast"
 

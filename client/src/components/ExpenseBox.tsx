@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/drawer";
 import { toast } from "@/hooks/use-toast";
 import { ToastAction } from "@/components/ui/toast";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 const ExpenseBox = ({
   expense_id,

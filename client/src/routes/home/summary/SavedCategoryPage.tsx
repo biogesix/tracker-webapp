@@ -4,10 +4,10 @@ import calculatePercentages from "@/utils/calculateCategoryPercentages";
 import { Expense, SavedCategories } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Outlet, useLoaderData, Link } from "react-router-dom";
+import { Outlet, useLoaderData, Link } from "react-router";
 
 const SavedCategoryPage = () => {
-  const category = useLoaderData() as SavedCategories;
+  const category = useLoaderData<SavedCategories>();
 
   const { data: savedCategoryExpenses } = useQuery<Expense[]>({
     queryKey: ["savedCategory", category.saved_category_id, "expenses"],

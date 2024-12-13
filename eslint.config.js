@@ -6,6 +6,11 @@ import pluginReact from "eslint-plugin-react";
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   {
+    settings: {
+      version: "detect",
+    },
+  },
+  {
     ignores: [
       "**/node_modules/**",
       "**/dist/**",
@@ -27,13 +32,13 @@ export default [
             "eslint.config.js",
           ],
         },
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         tsconfigRootDir: import.meta.dirname,
       },
     },
   },
   pluginJs.configs.recommended,
   pluginReact.configs.flat.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
   ...tseslint.configs.recommended,
   {
@@ -55,19 +60,16 @@ export default [
     rules: {
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-require-imports": "off",
-      "@typescript-eslint/no-unsafe-call": "warn",
     },
-    files: ["**/server/**"],
+    files: ["server/**"],
   },
   {
     rules: {
       "@typescript-eslint/no-floating-promises": "off",
       "@typescript-eslint/no-misused-promises": "off",
       "@typescript-eslint/no-unsafe-assignment": "warn",
-      "@typescript-eslint/no-unsafe-member-access": "warn",
       "@typescript-eslint/no-unsafe-return": "warn",
       "@typescript-eslint/no-unsafe-argument": "warn",
-      "@typescript-eslint/no-unsafe-call": "warn",
       "@typescript-eslint/prefer-nullish-coalescing": "off",
       "@typescript-eslint/consistent-type-assertions": "warn",
     },

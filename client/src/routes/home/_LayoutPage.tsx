@@ -1,4 +1,4 @@
-import { Outlet, useLocation, useNavigate } from "react-router-dom";
+import { Outlet, useLocation, useNavigate } from "react-router";
 import Drawer from "../../components/Sidebar";
 import { useEffect } from "react";
 import { supabase } from "../../utils/UserContext";
@@ -31,8 +31,8 @@ const LayoutPage = () => {
 
       const { data } =
         (await response.json()) as BackendResponse<WeeklySummary>;
-      console.log(data);
-      return data;
+
+      return data ?? {};
     },
   });
 
@@ -45,7 +45,7 @@ const LayoutPage = () => {
   }, [nav]);
 
   useEffect(() => {
-    console.log(path);
+    console.log(wrapUpInfo);
     if (wrapUpInfo && !path.pathname.startsWith("/wrapup")) {
       const lastSunday = new Date(getLastSunday()).getDate();
       const recentSummaryStart = new Date(wrapUpInfo.date_start).getDate();

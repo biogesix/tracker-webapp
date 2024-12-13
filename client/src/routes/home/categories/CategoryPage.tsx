@@ -5,7 +5,7 @@ import calculatePercentages from "@/utils/calculateCategoryPercentages";
 import { Category, Expense } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router";
 
 const CategoryPage = () => {
   const { category_id } = useParams();

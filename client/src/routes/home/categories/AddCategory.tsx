@@ -1,7 +1,7 @@
 import React, { useState, FormEvent, useEffect } from "react";
 import { CATEGORY_COLORS } from "../../../utils/constants";
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { toast } from "@/hooks/use-toast";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Category } from "@/utils/types";

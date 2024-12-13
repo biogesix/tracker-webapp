@@ -2,7 +2,7 @@ import sampleDesign from "../assets/sample_design.png";
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { Button } from "../components/ui/button";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 const Landing = () => {
   const section1Ref = useRef(null);

@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import getUser from "@/utils/getUser";
 import { User } from "@/utils/types";
 import { toast } from "@/hooks/use-toast";

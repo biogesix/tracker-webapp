@@ -1,13 +1,13 @@
 import { useState, FormEvent } from "react";
 import { CATEGORY_COLORS } from "../../../utils/constants";
-import { useLoaderData, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router";
 import { Category } from "@/utils/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
 import { Trash } from "lucide-react";
 
 const EditCategory = () => {
-  const category = useLoaderData() as Category;
+  const category = useLoaderData();
   const nav = useNavigate();
 
   const queryClient = useQueryClient();

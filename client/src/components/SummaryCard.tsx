@@ -1,7 +1,7 @@
 import { BackendResponse } from "@/interfaces/BackendResponse";
 import { SavedCategories, WeeklySummary } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import { CategoryGraph } from "./PieChart";
 
 const WeeklySummaryCard = ({ summary }: { summary: WeeklySummary }) => {

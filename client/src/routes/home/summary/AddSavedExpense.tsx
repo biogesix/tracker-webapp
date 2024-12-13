@@ -2,7 +2,7 @@ import { toast } from "@/hooks/use-toast";
 import { Expense } from "@/utils/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router";
 
 const AddSavedExpense = () => {
   const { saved_category_id } = useParams();

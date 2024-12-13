@@ -143,6 +143,8 @@ weeklySummaryRouter.get("/user/:id", async (req: Request, res: Response) => {
       `SELECT * FROM "Weekly Summary" WHERE user_id = $1 ORDER BY weekly_summary_id DESC`,
       [id]
     );
+
+    console.log(rows);
     res.status(200).json({
       data: rows,
     });
@@ -181,6 +183,7 @@ weeklySummaryRouter.get(
         `SELECT * FROM "Weekly Summary" WHERE user_id = $1 ORDER BY weekly_summary_id DESC LIMIT 1`,
         [id]
       );
+      console.log(rows);
       res.status(200).json({
         data: rows[0],
       });

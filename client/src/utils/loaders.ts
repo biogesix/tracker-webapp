@@ -1,5 +1,5 @@
 import { QueryClient } from "@tanstack/react-query";
-import { LoaderFunctionArgs } from "react-router-dom";
+import { LoaderFunctionArgs } from "react-router";
 import getUser from "./getUser";
 
 export const getCategory = (queryClient: QueryClient) => {
