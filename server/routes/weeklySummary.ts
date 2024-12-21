@@ -102,11 +102,14 @@ weeklySummaryRouter.post(
           console.log("category id ", category.category_id);
 
           await pool.query(
-            'UPDATE "Category" SET budget = $1 WHERE category_id = $2',
-            [newBudgets[category.category_id!], category.category_id]
+            `UPDATE "Category" SET amount_spent = $1, amount_left = $2,  budget = $2 WHERE category_id = $3`,
+            [0, newBudgets[category.category_id!], category.category_id]
           );
         } else {
-          console.log(category.category_id);
+          await pool.query(
+            `UPDATE "Category" SET amount_spent = $1, amount_left = $2, WHERE category_id = $3`,
+            [0, category.budget, category.category_id]
+          );
         }
       });
 

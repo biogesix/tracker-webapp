@@ -1,7 +1,6 @@
 import { supabase } from "./UserContext";
 
 const getUser = async () => {
-  console.log("flis");
   const { data: userData, error } = await supabase.auth.getUser();
 
   if (error) {

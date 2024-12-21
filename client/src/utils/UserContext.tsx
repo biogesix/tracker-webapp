@@ -34,7 +34,6 @@ const UserProvider = ({ children }: { children: React.ReactNode }) => {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((event, session) => {
       setSupabaseSession(session);
-      console.log(event);
 
       if (event == "SIGNED_IN") {
         queryClient.ensureQueryData({

@@ -13,6 +13,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import getUser from "@/utils/getUser";
 import { toast } from "@/hooks/use-toast";
 import { BackendError } from "@/interfaces/ErrorResponse";
+import { BackendResponse } from "@/interfaces/BackendResponse";
 
 const WrapupEditCategory = () => {
   const categories = useLoaderData() as Category[];
@@ -78,18 +79,33 @@ const WrapupEditCategory = () => {
         description: "Success updating category budgets.",
       });
 
-      // for each of the categories fetch the category9
       categories.forEach(async (category) => {
         await queryClient.refetchQueries({
           queryKey: ["category", category.category_id],
+          queryFn: async () => {
+            const response = await fetch(
+              `${import.meta.env.VITE_SERVER_URL}/category/${category.category_id}`
+            );
+
+            if (!response.ok) {
+              throw Error("Error Fetched");
+            }
+
+            const { data } =
+              (await response.json()) as BackendResponse<Category>;
+            return data;
+          },
         });
-      });
-      await queryClient.invalidateQueries({
-        queryKey: ["weeklySummary"],
       });
       await queryClient.invalidateQueries({
         queryKey: ["categories"],
       });
+      await queryClient.fetchQuery({
+        queryKey: ["weeklySummary"],
+      });
+
+      // for each of the categories fetch the category9
+
       nav("/dashboard");
     },
     onError: () => {

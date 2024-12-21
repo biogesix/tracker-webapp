@@ -28,14 +28,12 @@ const LayoutPage = () => {
         `${import.meta.env.VITE_SERVER_URL}/summary/user/${user!.user_id}/recent`
       );
 
-      console.log(response);
       if (!response.ok) {
         throw Error("Error Fetched");
       }
 
       const { data } =
         (await response.json()) as BackendResponse<WeeklySummary>;
-      console.log(data);
       return data;
     },
   });
@@ -49,7 +47,6 @@ const LayoutPage = () => {
   }, [nav]);
 
   useEffect(() => {
-    console.log(path);
     if (wrapUpInfo && !path.pathname.startsWith("/wrapup")) {
       const lastSunday = new Date(getLastSunday()).getDate();
       const recentSummaryStart = new Date(wrapUpInfo.date_start).getDate();

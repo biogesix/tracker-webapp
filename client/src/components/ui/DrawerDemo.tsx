@@ -75,19 +75,30 @@ export function DrawerDemo({ open, setOpen }: DrawerDemoProps) {
         description: "Used the same categories from the previous week.",
       });
 
-      console.log(categories);
       categories?.forEach(async (category) => {
-        console.log("MAMA ");
-        console.log(category);
         await queryClient.refetchQueries({
           queryKey: ["category", category.category_id],
+          queryFn: async () => {
+            const response = await fetch(
+              `${import.meta.env.VITE_SERVER_URL}/category/${category.category_id}`
+            );
+
+            if (!response.ok) {
+              throw Error("Error Fetched");
+            }
+
+            const { data } =
+              (await response.json()) as BackendResponse<Category>;
+            return data;
+          },
         });
       });
-      await queryClient.invalidateQueries({
-        queryKey: ["weeklySummary"],
-      });
+
       await queryClient.invalidateQueries({
         queryKey: ["categories"],
+      });
+      await queryClient.fetchQuery({
+        queryKey: ["weeklySummary"],
       });
       nav("/dashboard");
     },

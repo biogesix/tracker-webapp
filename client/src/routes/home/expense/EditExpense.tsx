@@ -126,9 +126,14 @@ const EditExpense = () => {
     mutationFn: async (e: FormEvent) => {
       e.preventDefault();
       const final_price = price ?? 0;
-      console.log("date: ", timeDate);
 
-      if ((category?.amount_left ?? 0 + expense.total) < total) {
+      if (!savedCategory && !category) {
+        throw Error("Category not found.");
+      }
+
+      const actualCategory = category ?? savedCategory;
+      const money_left = actualCategory!.amount_left + expense.total;
+      if (money_left < total) {
         throw Error("Your budget is lower than your amount spent.");
       }
 
@@ -162,8 +167,6 @@ const EditExpense = () => {
         category_id: expense.category_id,
         date: localeDate ? localeDate : new Date(),
       };
-
-      console.log(newExpense);
 
       const response = await fetch(
         `${import.meta.env.VITE_SERVER_URL}/expense/${expense.expense_id}`,

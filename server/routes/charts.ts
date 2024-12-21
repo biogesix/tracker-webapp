@@ -11,7 +11,6 @@ chartRouter.get(
   async (req: Request, res: Response, next: NextFunction) => {
     const { user_id, weekly_summary_id } = req.params;
     const { isRecent } = req.query;
-    console.log(weekly_summary_id);
     try {
       if (weekly_summary_id === "0") {
         console.log("parse equal to 0");
@@ -47,6 +46,8 @@ chartRouter.get(
           },
         });
       } else {
+        console.log("parsn't equal to 0");
+
         if (isRecent === "true") {
           const { rows } = await pool.query(
             `SELECT e.total, e.date FROM "Expense" e
@@ -77,10 +78,6 @@ chartRouter.get(
             })
           );
 
-          console.log(rows);
-          console.log(date_start);
-          console.log(date_end);
-
           const arranged = groupExpensesByDay(rows);
           res.status(200).json({
             data: {
@@ -106,10 +103,6 @@ chartRouter.get(
 
           const date_start = new Date(rows[0].date_start).toDateString();
           const date_end = new Date(rows[0].date_end).toDateString();
-
-          console.log(rows);
-          console.log(date_start);
-          console.log(date_end);
 
           const arranged = groupExpensesByDay(rows);
           res.status(200).json({
