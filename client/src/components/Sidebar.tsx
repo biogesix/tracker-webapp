@@ -52,7 +52,7 @@ const Sidebar = () => {
 
   return (
     <div className="z-20">
-      <header className="bg-vanilla flex h-16 w-full items-center justify-between px-16 text-black drop-shadow-md">
+      <header className="flex h-16 w-full items-center justify-between bg-white/30 px-16 text-black shadow-md drop-shadow-md backdrop-blur-md">
         <button onClick={toggleMenu} className="text-2xl">
           <FontAwesomeIcon icon={faBarsProgress} />
         </button>
